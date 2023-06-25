@@ -15,7 +15,11 @@ public class Map extends JPanel {
     private Color[][] background;
     private Shape block;
     private Shape[] blocks;
-    // private Projection projection;
+    private Shape[] nextBlocks;
+    private Shape[] bag;
+    protected boolean isBagEmpty;
+    private Shape projection;
+
 
     // Constructor
     public Map(JPanel position){
@@ -29,6 +33,10 @@ public class Map extends JPanel {
         blocks = new Shape[]{new BlueBar(), new PurpleT(), new GreenS(), new RedZ(), new BlueL(), new OrangeL(), new YellowBox()};
     }
     
+    // public void initNextBlocks(){
+    //     Random r = new Random();
+    //     nextBlocks = new Shape[]{}
+    // }
     public void initBackground(){
         background = new Color[linhas][colunas];
     }
@@ -47,6 +55,11 @@ public class Map extends JPanel {
 
         block = blocks[r.nextInt(blocks.length)];
         block.spawn();
+        this.projection = spawnProjection();
+        projection.spawn();
+
+        
+        repaint();
     }
 
     public boolean isBlockOutOfBounds(){
@@ -57,14 +70,15 @@ public class Map extends JPanel {
         return false;
     }
 
-    public void shadow(){
-
-    }
     public boolean moveShapeDown(){
         if(checkBottom() == false){
             return false;
         }
         block.moveDown();
+
+        updateProjection(projection);
+
+
         repaint();
         return true;
     }
@@ -74,6 +88,10 @@ public class Map extends JPanel {
             return;
         }
         block.moveRight();
+
+
+        updateProjection(projection);
+
         repaint();
     }
     public void moveShapeLeft(){
@@ -82,6 +100,9 @@ public class Map extends JPanel {
             return;
         }
         block.moveLeft();
+
+        updateProjection(projection);
+
         repaint();
     }
     public void moveShapeFaterDown(){
@@ -96,22 +117,59 @@ public class Map extends JPanel {
         }
         repaint();
     }
+    
     //*************************************** */
     //PROJECTION WORKING AREA
     //***************************************** */
     public void moveProjectionInstantlyDown(Shape projection){
         if(projection == null) return;
-        while(checkBottom()){
-            moveShapeDown();
+        while(projectionCheckBottom(projection)){
+            moveProjectionDown(projection);
         }
         repaint();
     }
+    private boolean projectionCheckBottom(Shape projection){
+        if(projection.getBottomEdge() == linhas){
+            return false;
+        }
+        
+        int[][]dimensions = projection.getDimensions();
+        int w = projection.getWidth();
+        int h = projection.getHeight();
+
+        for(int i = 0; i < w; i++){
+            for(int j = h-1; j >= 0; j--){
+                if(dimensions[j][i] != 0){
+                    int x = i + projection.getX();
+                    int y = j + projection.getY()+ 1;
+                    if(y < 0) break;
+                    if(background[y][x] != null) return false;
+                    break;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean moveProjectionDown(Shape projection){
+        if(projectionCheckBottom(projection) == false){
+            return false;
+        }
+        projection.moveDown();
+        repaint();
+        return true;
+    }
+    //*********************************************************** */
+
+
     public void rotateShape(){
         if(block == null) return;
         block.rotate();
         if(block.getLeftEdge() < 0) block.setX(0);
         if(block.getRightEdge() >= colunas) block.setX(colunas - block.getWidth());
         if(block.getBottomEdge() >= linhas) block.setY(linhas - block.getHeight());
+
+        updateProjection(projection);
+
         repaint();
     }
     private boolean checkBottom(){
@@ -206,11 +264,38 @@ public class Map extends JPanel {
             }
         }
     }
+    //***************** */
     private Shape spawnProjection(){
-        Shape projection = this.block;
-
+        Shape projection = new Shape(block.getDimensions(), block.getColor());
+        updateProjection(projection);
         return projection;
     }
+    private void updateProjection(Shape projection){
+        projection.setDimensions(block.getDimensions());
+        projection.setX(block.getX());
+        projection.setY(block.getY());
+        projection.color = Color.gray;
+        moveProjectionInstantlyDown(projection);
+    }
+    private void paintProjection(Graphics g, Shape projection){
+        int h = projection.getHeight();
+        int w = projection.getWidth();
+        Color color = projection.getColor();
+        int[][] dimensions = projection.getDimensions();
+
+        for(int i = 0; i < h; i++){
+            for(int j = 0; j< w;j++){
+                if(dimensions[i][j] == 1){
+                    int x = (j + projection.getX())*tamanhoPixel;
+                    int y = (i + projection.getY())*tamanhoPixel;
+                    drawGridSquare(g, color, x, y);
+                }
+            }
+        }
+    }
+    //********************************* */
+
+
     private void paintShape(Graphics g){
         int h = block.getHeight();
         int w = block.getWidth();
@@ -289,6 +374,7 @@ public class Map extends JPanel {
         super.paintComponent(g);
         paintGrid(g);
         drawBackground(g);
+        paintProjection(g, projection);
         paintShape(g);
 
     }

@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 
 public class GameThread extends Thread{
 
-    private Map mp;
-    private MapForm mf;
-    private int score;
-    private int level = 1;
-    private int scorePerLevel = 3;
-    private int pause = 1000;
-    private int decreasePause = 100;
+    protected Map mp;
+    protected MapForm mf;
+    protected int score;
+    protected int level = 1;
+    protected int scorePerLevel = 3;
+    protected int pause = 1000;
+    protected int decreasePause = 100;
 
     public GameThread(Map mp, MapForm mf){
         this.mp = mp;

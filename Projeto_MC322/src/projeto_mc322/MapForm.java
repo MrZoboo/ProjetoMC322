@@ -31,6 +31,7 @@ public class MapForm extends JFrame {
         im.put(KeyStroke.getKeyStroke("UP"), "up");
         im.put(KeyStroke.getKeyStroke("DOWN"), "down");
         im.put(KeyStroke.getKeyStroke("SPACE"), "space");
+        im.put(KeyStroke.getKeyStroke("C"), "c");
 
         am.put("right", new AbstractAction(){
 
@@ -65,6 +66,16 @@ public class MapForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Down");
                 mp.moveShapeFaterDown();
+
+            }
+            
+        });
+        am.put("c", new AbstractAction(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Bag");
+
             }
             
         });
@@ -74,6 +85,17 @@ public class MapForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Space");
                 mp.moveShapeInstantlyDown();
+                mp.saveToBackground();
+                gt.score += mp.clearLines();
+                gt.mf.updateScore(gt.score);
+
+                int lvl = gt.score/gt.scorePerLevel +1;
+                if(lvl > gt.level){
+                    gt.level = lvl;
+                    gt.mf.updateLevel(gt.level);
+                    gt.pause -= gt.decreasePause;
+                }
+                mp.spawnShape();
             }
             
         });

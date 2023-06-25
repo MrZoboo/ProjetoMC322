@@ -6,7 +6,7 @@ public class Shape {
     // Instance variables
     private int[][] dimensions;
     private int[][][] allRotations;
-    private Color color;
+    protected Color color;
     private int x, y;
     private int currentRotation;
 
