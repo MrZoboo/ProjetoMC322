@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class Bag extends JPanel{
+public class Bag extends JPanel implements PanelAsset{
     private final int linhas;
     private final int colunas;
     private final int tamanhoPixel = 22;
@@ -26,12 +26,12 @@ public class Bag extends JPanel{
         this.bag = new Shape(bag.getDimensions(), bag.getColor());
     }
 
-    private void drawGridSquare(Graphics g, Color color, int x, int y){
+    public void drawGridSquare(Graphics g, Color color, int x, int y){
         g.setColor(color);
         g.fillRect(x, y, tamanhoPixel, tamanhoPixel);
     }
 
-    public void paintShapeBag(Graphics g){
+    public void paintShape(Graphics g){
         int h = bag.getHeight();
         int w = bag.getWidth();
         Color color = bag.getColor();
@@ -53,6 +53,6 @@ public class Bag extends JPanel{
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        paintShapeBag(g);
+        paintShape(g);
     }
 }

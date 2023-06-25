@@ -3,17 +3,17 @@ package projeto_mc322;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GameThread extends Thread{
+public class MPGameThread extends Thread{
 
     protected Map mp;
-    protected SPMapForm mf;
+    protected MpMapForm mf;
     protected int score;
     protected int level = 1;
     protected int scorePerLevel = 3;
     protected int pause = 1000;
     protected int decreasePause = (int) Math.floor(pause*(0.1));
 
-    public GameThread(Map mp, SPMapForm mf){
+    public MPGameThread(Map mp, MpMapForm mf){
         this.mp = mp;
         this.mf = mf;
         mf.updateScore(score);
@@ -34,7 +34,7 @@ public class GameThread extends Thread{
                 }
             }
             if(mp.isBlockOutOfBounds()){
-                Projeto_MC322.gameOver(score);
+                Projeto_MC322.gameOverMulti();
                 break;
             }
             mp.saveToBackground();

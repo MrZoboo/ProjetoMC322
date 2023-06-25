@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/SPMapForm.java</file>
             <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/MenuForm.java</file>
-            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/MapForm.java</file>
-            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/AudioPlayer.java</file>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/MpMapForm.java</file>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/GameThread.java</file>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/MPGameThread.java</file>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/LeaderBoardForm.java</file>
+            <file>file:/home/zebu-viterbo/NetBeansProjects/Projeto_MC322/src/projeto_mc322/Projeto_MC322.java</file>
         </group>
     </open-files>
 </project-private>

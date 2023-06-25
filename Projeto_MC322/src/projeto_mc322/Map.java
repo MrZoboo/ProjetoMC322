@@ -8,16 +8,15 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
-public class Map extends JPanel {
+public class Map extends JPanel implements PanelAsset {
     
     // Instance Variables
-    private final int linhas;
-    private final int colunas;
-    private final int tamanhoPixel = 30;
+    private int linhas;
+    private int colunas;
+    private int tamanhoPixel = 30;
     private Color[][] background;
     private Shape block;
     private Shape[] blocks;
-    // protected List <Shape> nextBlocks = new ArrayList<>();
     protected Shape bag;
     protected boolean isBagEmpty = true;
     protected boolean canSave = true;
@@ -367,7 +366,7 @@ public class Map extends JPanel {
     //********************************* */
 
 
-    private void paintShape(Graphics g){
+    public void paintShape(Graphics g){
         int h = block.getHeight();
         int w = block.getWidth();
         Color color = block.getColor();
@@ -434,7 +433,7 @@ public class Map extends JPanel {
         }
     }
 
-    private void drawGridSquare(Graphics g, Color color, int x, int y){
+    public void drawGridSquare(Graphics g, Color color, int x, int y){
         g.setColor(color);
         g.fillRect(x, y, tamanhoPixel, tamanhoPixel);
         g.setColor(Color.black);

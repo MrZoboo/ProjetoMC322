@@ -7,9 +7,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-public class Queue extends JPanel{
+public class Queue extends JPanel implements PanelAsset{
     private final int tamanhoPixel = 22;
     protected List<Shape> nextBlocks = new ArrayList<>();
+    private Shape block;
 
     public Queue(JPanel queuePanel){
         this.setBounds(queuePanel.getBounds());
@@ -24,12 +25,12 @@ public class Queue extends JPanel{
         this.nextBlocks = nextBlocks;
     }
 
-    private void drawGridSquare(Graphics g, Color color, int x, int y){
+    public void drawGridSquare(Graphics g, Color color, int x, int y){
         g.setColor(color);
         g.fillRect(x, y, tamanhoPixel, tamanhoPixel);
     }
 
-    public void paintShapeQueue(Graphics g, Shape block){
+    public void paintShape(Graphics g){
         int h = block.getHeight();
         int w = block.getWidth();
         Color color = block.getColor();
@@ -49,11 +50,12 @@ public class Queue extends JPanel{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         for(int i = 0; i < 6; i++){
-            Shape block = new Shape((nextBlocks.get(i).getAllRotations()[1]), nextBlocks.get(i).getColor());
-            block.setX(0);
-            block.setY(i*3);
-            block.rotate();
-            paintShapeQueue(g, block);
+            Shape nextBlock = new Shape((nextBlocks.get(i).getAllRotations()[1]), nextBlocks.get(i).getColor());
+            nextBlock.setX(0);
+            nextBlock.setY(i*3);
+            nextBlock.rotate();
+            block = nextBlock;
+            paintShape(g);
         }
 
 

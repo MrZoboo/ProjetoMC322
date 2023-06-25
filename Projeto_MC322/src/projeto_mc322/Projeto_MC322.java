@@ -7,11 +7,13 @@ import javax.swing.UIManager;
 
 
 public class Projeto_MC322 {
-    private static MapForm mf;
+    
+    private static SPMapForm mf;
     private static MenuForm menuf;
     private static LeaderBoardForm lf;
+    private static MpMapForm multif;
     
-    public static void start(){
+    public static void startSinglePlayer(){
         mf.setVisible(true);
         mf.startGame();
     }
@@ -24,10 +26,23 @@ public class Projeto_MC322 {
         menuf.setVisible(true);
     }
     
+    public static void showMultiPlayer(){
+        multif.setVisible(true);
+        multif.startGame();
+    }
+    
     public static void gameOver(int score){
-        String playerName = JOptionPane.showInputDialog("Perdeu, playboy");
+        String playerName = JOptionPane.showInputDialog("You Loose!");
         mf.setVisible(false);
         lf.addPlayer(playerName, score);
+    }
+    public static void gameOverMulti(){
+        multif.gt1.interrupt();
+        multif.gt2.interrupt();
+        String playerName = JOptionPane.showInputDialog("You Loose!");
+        multif.setVisible(false);
+        menuf.setVisible(true);
+        
     }
 
     public static void main(String[] args) {
@@ -67,9 +82,10 @@ public class Projeto_MC322 {
             // Show your JFram
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            mf = new MapForm();
+            mf = new SPMapForm();
             menuf = new MenuForm();
             lf = new LeaderBoardForm();
+            multif = new MpMapForm();
 
             menuf.setVisible(true);
                 
