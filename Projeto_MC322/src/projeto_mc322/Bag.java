@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class Bag extends JPanel{
     private final int linhas;
     private final int colunas;
-    private final int tamanhoPixel = 19;
+    private final int tamanhoPixel = 22;
     protected Shape bag = new OrangeL();
 
     public Bag(JPanel bagPanel){
@@ -54,6 +54,5 @@ public class Bag extends JPanel{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         paintShapeBag(g);
-        System.out.println(bag.getHeight());
     }
 }

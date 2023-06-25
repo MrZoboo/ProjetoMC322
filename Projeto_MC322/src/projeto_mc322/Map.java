@@ -2,6 +2,8 @@ package projeto_mc322;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -15,12 +17,13 @@ public class Map extends JPanel {
     private Color[][] background;
     private Shape block;
     private Shape[] blocks;
-    private Shape[] nextBlocks;
+    // protected List <Shape> nextBlocks = new ArrayList<>();
     protected Shape bag;
     protected boolean isBagEmpty = true;
     protected boolean canSave = true;
     private Shape projection;
     public Bag bagStructure;
+    public Queue queueStructure;
 
 
     // Constructor
@@ -37,10 +40,18 @@ public class Map extends JPanel {
         blocks = new Shape[]{new BlueBar(), new PurpleT(), new GreenS(), new RedZ(), new BlueL(), new OrangeL(), new YellowBox()};
     }
     
-    // public void initNextBlocks(){
-    //     Random r = new Random();
-    //     nextBlocks = new Shape[]{}
-    // }
+    public void initNextBlocks(){
+        for(int i = 0; i < 7; i++){
+            Random r = new Random();
+            queueStructure.nextBlocks.add(blocks[r.nextInt(blocks.length)]);
+        }
+        
+    }
+    public void addNextBlockToQueue(){
+        queueStructure.nextBlocks.remove(0);
+        Random r = new Random();
+        queueStructure.nextBlocks.add(blocks[r.nextInt(blocks.length)]);
+    }
 
     public void initBackground(){
         background = new Color[linhas][colunas];
@@ -56,9 +67,10 @@ public class Map extends JPanel {
 
     // Spawning the shape
     public void spawnShape(){
-        Random r = new Random();
         canSave = true;
-        block = blocks[r.nextInt(blocks.length)];
+        block = queueStructure.nextBlocks.get(0);
+        addNextBlockToQueue();
+
         block.spawn();
         this.projection = spawnProjection();
         projection.spawn();
@@ -67,8 +79,10 @@ public class Map extends JPanel {
         repaint();
     }
     public void spawnNextShape(){
-        Random r = new Random();
-        block = blocks[r.nextInt(blocks.length)];
+        // Random r = new Random();
+        // block = blocks[r.nextInt(blocks.length)];
+        block = queueStructure.nextBlocks.get(0);
+        addNextBlockToQueue();
         block.spawn();
         this.projection = spawnProjection();
         projection.spawn();
@@ -428,17 +442,14 @@ public class Map extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g){
-        // try{
+        // bagStructure.repaint();
+        queueStructure.repaint();
         super.paintComponent(g);
         paintGrid(g);
-        // bagStructure.paintComponent(g);
         drawBackground(g);
         paintProjection(g, projection);
         paintShape(g);
-        // }
-        // catch(Exception e){
-        //     spawnShape();
-        // }
+
 
 
     }

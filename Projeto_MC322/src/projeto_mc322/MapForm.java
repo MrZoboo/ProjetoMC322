@@ -13,15 +13,21 @@ public class MapForm extends JFrame {
     private Map mp;
     private GameThread gt;
     private Bag bg;
+    private Queue q;
     
     public MapForm() {
 
         initComponents();
+        q = new Queue(nextShapes);
         mp = new Map(mapPosition);
         bg = new Bag(bagPanel);
+
         mp.bagStructure = bg;
+        mp.queueStructure = q;
         this.add(bg);
         this.add(mp);
+        this.add(q);
+        mp.initNextBlocks();
         initControls();
 
     }
