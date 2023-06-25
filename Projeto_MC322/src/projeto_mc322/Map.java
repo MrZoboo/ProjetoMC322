@@ -16,14 +16,17 @@ public class Map extends JPanel {
     private Shape block;
     private Shape[] blocks;
     private Shape[] nextBlocks;
-    private Shape bag;
+    protected Shape bag;
     protected boolean isBagEmpty = true;
     protected boolean canSave = true;
     private Shape projection;
+    public Bag bagStructure;
 
 
     // Constructor
     public Map(JPanel position){
+
+
         this.setBounds(position.getBounds());
         this.setBackground(position.getBackground());
         this.setBorder(position.getBorder());
@@ -93,15 +96,25 @@ public class Map extends JPanel {
     public void saveToBag(){
         if(canSave){
             if(isBagEmpty){
-                bag = new Shape(block.getDimensions(), block.getColor());
+                bag = new Shape(block.getAllRotations()[1], block.getColor());
+                
                 spawnNextShape();
                 isBagEmpty = false;
                 canSave = false;
+                bag.setX(1);
+                bag.setY(2);
+                bagStructure.bag =bag;
+                bagStructure.repaint();
                 return;
             }
             else{
+                
                 Shape tmp = new Shape(bag.getDimensions(), bag.getColor());
-                bag = new  Shape(block.getDimensions(), block.getColor());
+                bag = new  Shape(block.getAllRotations()[1], block.getColor());
+                bag.setX(1);
+                bag.setY(2);
+                bagStructure.bag = bag;
+                bagStructure.repaint();
                 spawnBagShape(tmp);
 
                 canSave = false;
@@ -415,11 +428,18 @@ public class Map extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g){
+        // try{
         super.paintComponent(g);
         paintGrid(g);
+        // bagStructure.paintComponent(g);
         drawBackground(g);
         paintProjection(g, projection);
         paintShape(g);
+        // }
+        // catch(Exception e){
+        //     spawnShape();
+        // }
+
 
     }
 }

@@ -31,6 +31,9 @@ public class Shape {
             dimensions = allRotations[i];
         }
     }
+    public int[][][] getAllRotations(){
+        return allRotations;
+    }
     public int[][] getDimensions(){
         return dimensions;
     }

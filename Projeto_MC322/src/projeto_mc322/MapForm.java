@@ -12,11 +12,15 @@ public class MapForm extends JFrame {
 
     private Map mp;
     private GameThread gt;
+    private Bag bg;
     
     public MapForm() {
 
         initComponents();
         mp = new Map(mapPosition);
+        bg = new Bag(bagPanel);
+        mp.bagStructure = bg;
+        this.add(bg);
         this.add(mp);
         initControls();
 
