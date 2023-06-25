@@ -75,6 +75,7 @@ public class MapForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Bag");
+                mp.saveToBag();
 
             }
             

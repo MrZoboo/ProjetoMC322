@@ -16,8 +16,9 @@ public class Map extends JPanel {
     private Shape block;
     private Shape[] blocks;
     private Shape[] nextBlocks;
-    private Shape[] bag;
-    protected boolean isBagEmpty;
+    private Shape bag;
+    protected boolean isBagEmpty = true;
+    protected boolean canSave = true;
     private Shape projection;
 
 
@@ -37,6 +38,7 @@ public class Map extends JPanel {
     //     Random r = new Random();
     //     nextBlocks = new Shape[]{}
     // }
+
     public void initBackground(){
         background = new Color[linhas][colunas];
     }
@@ -52,13 +54,31 @@ public class Map extends JPanel {
     // Spawning the shape
     public void spawnShape(){
         Random r = new Random();
-
+        canSave = true;
         block = blocks[r.nextInt(blocks.length)];
         block.spawn();
         this.projection = spawnProjection();
         projection.spawn();
 
         
+        repaint();
+    }
+    public void spawnNextShape(){
+        Random r = new Random();
+        block = blocks[r.nextInt(blocks.length)];
+        block.spawn();
+        this.projection = spawnProjection();
+        projection.spawn();
+
+        
+        repaint();
+    }
+    public void spawnBagShape(Shape bag){
+        block = new Shape(bag.getDimensions(), bag.getColor());
+        block.spawn();
+        this.projection = spawnProjection();
+        projection.spawn();
+
         repaint();
     }
 
@@ -69,7 +89,31 @@ public class Map extends JPanel {
         }
         return false;
     }
+    
+    public void saveToBag(){
+        if(canSave){
+            if(isBagEmpty){
+                bag = new Shape(block.getDimensions(), block.getColor());
+                spawnNextShape();
+                isBagEmpty = false;
+                canSave = false;
+                return;
+            }
+            else{
+                Shape tmp = new Shape(bag.getDimensions(), bag.getColor());
+                bag = new  Shape(block.getDimensions(), block.getColor());
+                spawnBagShape(tmp);
 
+                canSave = false;
+                return;
+            }
+        }
+        else{
+            return;
+        }
+
+        
+    }
     public boolean moveShapeDown(){
         if(checkBottom() == false){
             return false;
@@ -117,7 +161,7 @@ public class Map extends JPanel {
         }
         repaint();
     }
-    
+
     //*************************************** */
     //PROJECTION WORKING AREA
     //***************************************** */
