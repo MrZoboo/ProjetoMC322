@@ -448,7 +448,14 @@ public class Map extends JPanel {
         paintGrid(g);
         drawBackground(g);
         paintProjection(g, projection);
-        paintShape(g);
+        try{
+            paintShape(g);
+        }
+        catch(Exception e){
+
+        }
+
+
 
 
 

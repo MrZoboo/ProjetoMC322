@@ -137,7 +137,7 @@ public class MapForm extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        mapPosition.setBackground(new java.awt.Color(102, 102, 102));
+        mapPosition.setBackground(new java.awt.Color(51, 0, 0));
         mapPosition.setPreferredSize(new java.awt.Dimension(301, 481));
 
         javax.swing.GroupLayout mapPositionLayout = new javax.swing.GroupLayout(mapPosition);
@@ -157,7 +157,7 @@ public class MapForm extends JFrame {
         levelDisplay.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         levelDisplay.setText("Level: 1");
 
-        nextShapes.setBackground(new java.awt.Color(102, 102, 102));
+        nextShapes.setBackground(new java.awt.Color(51, 0, 0));
 
         javax.swing.GroupLayout nextShapesLayout = new javax.swing.GroupLayout(nextShapes);
         nextShapes.setLayout(nextShapesLayout);
@@ -178,13 +178,13 @@ public class MapForm extends JFrame {
             }
         });
 
-        bagPanel.setBackground(new java.awt.Color(102, 102, 102));
+        bagPanel.setBackground(new java.awt.Color(51, 0, 0));
 
         javax.swing.GroupLayout bagPanelLayout = new javax.swing.GroupLayout(bagPanel);
         bagPanel.setLayout(bagPanelLayout);
         bagPanelLayout.setHorizontalGroup(
             bagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 104, Short.MAX_VALUE)
         );
         bagPanelLayout.setVerticalGroup(
             bagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,10 +196,13 @@ public class MapForm extends JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuButton, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(bagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(menuButton)))
                 .addGap(26, 26, 26)
                 .addComponent(mapPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)

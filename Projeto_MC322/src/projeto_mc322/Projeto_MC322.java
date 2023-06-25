@@ -32,7 +32,7 @@ public class Projeto_MC322 {
 
     public static void main(String[] args) {
             
-            UIManager.put( "control", new Color( 0, 0, 0) );
+            UIManager.put( "control", new Color( 51, 0, 0) );
             UIManager.put( "info", new Color(128,128,128) );
             UIManager.put( "nimbusBase", new Color( 18, 30, 49) );
             UIManager.put( "nimbusAlertYellow", new Color( 248, 187, 0) );

@@ -11,7 +11,7 @@ public class GameThread extends Thread{
     protected int level = 1;
     protected int scorePerLevel = 3;
     protected int pause = 1000;
-    protected int decreasePause = 100;
+    protected int decreasePause = (int) Math.floor(pause*(0.1));
 
     public GameThread(Map mp, MapForm mf){
         this.mp = mp;
@@ -19,7 +19,9 @@ public class GameThread extends Thread{
         mf.updateScore(score);
         mf.updateLevel(level);
     }
-
+    public void updatePause(){
+        decreasePause = (int) Math.floor(pause*(0.1)); 
+    }
     public void run(){
         while(true){
             mp.spawnShape();
@@ -40,10 +42,15 @@ public class GameThread extends Thread{
             mf.updateScore(score);
 
             int lvl = score/scorePerLevel +1;
+            if(score >= 30){
+                pause = 50;
+            }
             if(lvl > level){
                 level = lvl;
                 mf.updateLevel(level);
                 pause -= decreasePause;
+                updatePause();
+                System.out.println("PAUSA: " + pause + " DP " + decreasePause);
             }
         }
     }
