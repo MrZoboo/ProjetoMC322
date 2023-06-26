@@ -1,20 +1,20 @@
 package projeto_mc322;
 
 public class GameThread extends MovementThread{
-    protected SPMapForm mf;
+    protected SPMapUi mf;
 
-    public GameThread(Map mp, SPMapForm mf){
+    public GameThread(Map mp, SPMapUi mf){
         super(mp);
         this.mf = mf;
         mf.updateScore(score);
         mf.updateLevel(level);
     }
 
-    public SPMapForm getMf() {
+    public SPMapUi getMf() {
         return this.mf;
     }
 
-    public void setMf(SPMapForm mf) {
+    public void setMf(SPMapUi mf) {
         this.mf = mf;
     }
 
@@ -34,7 +34,7 @@ public class GameThread extends MovementThread{
                 }
             }
             if(mp.isBlockOutOfBounds()){
-                Projeto_MC322.gameOver(score);
+                Main.gameOver(score);
                 break;
             }
             mp.saveToBackground();

@@ -2,20 +2,20 @@ package projeto_mc322;
 
 public class MPGameThread extends MovementThread{
 
-    protected MpMapForm mf;
+    protected MpMapUi mf;
     protected Map opponent;
 
-    public MPGameThread(Map mp, Map opponent,  MpMapForm mf){
+    public MPGameThread(Map mp, Map opponent,  MpMapUi mf){
         super(mp);
         this.opponent = opponent;
         this.mf = mf;
     }
 
-    public MpMapForm getMf() {
+    public MpMapUi getMf() {
         return this.mf;
     }
 
-    public void setMf(MpMapForm mf) {
+    public void setMf(MpMapUi mf) {
         this.mf = mf;
     }
 
@@ -44,7 +44,7 @@ public class MPGameThread extends MovementThread{
                 }
             }
             if(mp.isBlockOutOfBounds()){
-                Projeto_MC322.gameOverMulti();
+                Main.gameOverMulti();
                 break;
             }
             mp.saveToBackground();

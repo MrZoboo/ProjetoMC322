@@ -26,17 +26,113 @@ public class Map extends JPanel implements PanelAsset {
     // Constructor
     public Map(JPanel position){
 
-
         this.setBounds(position.getBounds());
         this.setBackground(position.getBackground());
         this.setBorder(position.getBorder());
         this.colunas = position.getWidth()/tamanhoPixel;
         this.linhas = position.getHeight()/tamanhoPixel;
 
-
         blocks = new Shape[]{new BlueBar(), new PurpleT(), new GreenS(), new RedZ(), new BlueL(), new OrangeL(), new YellowBox()};
     }
-    
+
+    // Getters and Setters
+    public int getLinhas(){
+        return linhas;
+    }
+    public int getColunas(){
+        return colunas;
+    }
+    public void setLinhas(int linhas) {
+        this.linhas = linhas;
+    }
+    public void setColunas(int colunas) {
+        this.colunas = colunas;
+    }
+
+    public int getTamanhoPixel() {
+        return this.tamanhoPixel;
+    }
+
+    public void setTamanhoPixel(int tamanhoPixel) {
+        this.tamanhoPixel = tamanhoPixel;
+    }
+
+    public void setBackground(Color[][] background) {
+        this.background = background;
+    }
+
+    public Shape getBlock() {
+        return this.block;
+    }
+
+    public void setBlock(Shape block) {
+        this.block = block;
+    }
+
+    public Shape[] getBlocks() {
+        return this.blocks;
+    }
+
+    public void setBlocks(Shape[] blocks) {
+        this.blocks = blocks;
+    }
+
+    public Shape getBag() {
+        return this.bag;
+    }
+
+    public void setBag(Shape bag) {
+        this.bag = bag;
+    }
+
+    public boolean isIsBagEmpty() {
+        return this.isBagEmpty;
+    }
+
+    public boolean getIsBagEmpty() {
+        return this.isBagEmpty;
+    }
+
+    public void setIsBagEmpty(boolean isBagEmpty) {
+        this.isBagEmpty = isBagEmpty;
+    }
+
+    public boolean isCanSave() {
+        return this.canSave;
+    }
+
+    public boolean getCanSave() {
+        return this.canSave;
+    }
+
+    public void setCanSave(boolean canSave) {
+        this.canSave = canSave;
+    }
+
+    public Shape getProjection() {
+        return this.projection;
+    }
+
+    public void setProjection(Shape projection) {
+        this.projection = projection;
+    }
+
+    public Bag getBagStructure() {
+        return this.bagStructure;
+    }
+
+    public void setBagStructure(Bag bagStructure) {
+        this.bagStructure = bagStructure;
+    }
+
+    public Queue getQueueStructure() {
+        return this.queueStructure;
+    }
+
+    public void setQueueStructure(Queue queueStructure) {
+        this.queueStructure = queueStructure;
+    }
+
     public void initNextBlocks(){
         for(int i = 0; i < 7; i++){
             Random r = new Random();
@@ -54,13 +150,7 @@ public class Map extends JPanel implements PanelAsset {
         background = new Color[linhas][colunas];
     }
 
-    // Getters and Setters
-    public int getLinhas(){
-        return linhas;
-    }
-    public int getColunas(){
-        return colunas;
-    }
+
 
     // Spawning the shape
     public void spawnShape(){
@@ -332,7 +422,7 @@ public class Map extends JPanel implements PanelAsset {
             }
         }
     }
-    //***************** */
+
     private Shape spawnProjection(){
         Shape projection = new Shape(block.getDimensions(), block.getColor());
         updateProjection(projection);
@@ -361,6 +451,7 @@ public class Map extends JPanel implements PanelAsset {
             }
         }
     }
+
     //********************************* */
 
 
@@ -462,7 +553,6 @@ public class Map extends JPanel implements PanelAsset {
 
     @Override
     protected void paintComponent(Graphics g){
-        // bagStructure.repaint();
         queueStructure.repaint();
         super.paintComponent(g);
         paintGrid(g);
@@ -474,10 +564,6 @@ public class Map extends JPanel implements PanelAsset {
         catch(Exception e){
 
         }
-
-
-
-
 
     }
 }
