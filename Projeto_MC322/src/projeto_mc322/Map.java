@@ -403,7 +403,7 @@ public class Map extends JPanel implements PanelAsset {
         for(int i = linhas -1; i>= 0; i--){
             lineFilled = true;
             for(int j = 0; j < colunas; j++){
-                if(background[i][j] == null){
+                if(background[i][j] == null || background[i][j] == Color.darkGray){
                     lineFilled = false;
                     break;
                 }
@@ -419,6 +419,12 @@ public class Map extends JPanel implements PanelAsset {
         }
         return linesCleared;
     }
+
+    public void liftBarrier(){
+        shiftUp();
+        paintGrayBarrier();
+    }
+
     private void clearline(int i){
         for(int k = 0; k < colunas; k++){
             background[i][k] = null;
@@ -430,6 +436,23 @@ public class Map extends JPanel implements PanelAsset {
             for(int j = 0; j < colunas; j++){
                 background[k][j] = background[k-1][j];
             }
+        }
+    }
+    private void shiftUp(){
+        if(!checkBottom()){
+            block.setY(block.getY()-1);
+        }
+        for(int k = 0; k < linhas -1 ; k++){
+            for(int j = 0; j < colunas; j++){
+                background[k][j] = background[k+1][j];
+                
+            }
+        }
+        paintGrayBarrier();
+    }
+    private void paintGrayBarrier(){
+        for(int k = 0; k < colunas; k++){
+            background[linhas-1][k] = Color.darkGray;
         }
     }
 

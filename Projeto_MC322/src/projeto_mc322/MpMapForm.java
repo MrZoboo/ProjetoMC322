@@ -44,6 +44,8 @@ public class MpMapForm extends javax.swing.JFrame {
         
         mp1.initNextBlocks();
         mp2.initNextBlocks();
+
+
         initControls();
         
         
@@ -52,17 +54,18 @@ public class MpMapForm extends javax.swing.JFrame {
     public void startGame(){
         mp1.initBackground();
         mp2.initBackground();
-        gt1 = new MPGameThread(mp1, this);
-        gt2 = new MPGameThread(mp2, this);
+        gt1 = new MPGameThread(mp1, mp2, this);
+        gt2 = new MPGameThread(mp2, mp1, this);
+
         gt1.start();
         gt2.start();
     }
-    public void updateScore(int score){
-        scoreDisplay.setText("Score: "+ score);
-    }
-    public void updateLevel(int level ){
-        levelDisplay.setText("Level: "+ level);
-    }
+    // public void updateScore(int score){
+    //     scoreDisplay.setText("Score: "+ score);
+    // }
+    // public void updateLevel(int level ){
+    //     levelDisplay.setText("Level: "+ level);
+    // }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -322,13 +325,17 @@ public class MpMapForm extends javax.swing.JFrame {
                 System.out.println("Space");
                 mp2.moveShapeInstantlyDown();
                 mp2.saveToBackground();
-                gt2.score += mp2.clearLines();
-                gt2.mf.updateScore(gt2.score);
+                int tmp = mp2.clearLines();
+                gt2.score += tmp;
+                for(int i = 0; i < tmp; i++){
+                    mp1.liftBarrier();
+                }
+                // gt2.mf.updateScore(gt2.score);
 
                 int lvl = gt2.score/gt2.scorePerLevel +1;
                 if(lvl > gt2.level){
                     gt2.level = lvl;
-                    gt2.mf.updateLevel(gt2.level);
+                    // gt2.mf.updateLevel(gt2.level);
                     gt2.pause -= gt2.decreasePause;
                 }
                 mp2.spawnShape();
@@ -389,13 +396,17 @@ public class MpMapForm extends javax.swing.JFrame {
                 System.out.println("Space");
                 mp1.moveShapeInstantlyDown();
                 mp1.saveToBackground();
-                gt1.score += mp1.clearLines();
-                gt1.mf.updateScore(gt1.score);
+                int tmp = mp1.clearLines();
+                gt1.score += tmp;
+                for(int i = 0; i < tmp; i++){
+                    mp2.liftBarrier();
+                }
+                // gt1.mf.updateScore(gt1.score);
 
                 int lvl = gt1.score/gt1.scorePerLevel +1;
                 if(lvl > gt1.level){
                     gt1.level = lvl;
-                    gt1.mf.updateLevel(gt1.level);
+                    // gt1.mf.updateLevel(gt1.level);
                     gt1.pause -= gt1.decreasePause;
                 }
                 mp1.spawnShape();
