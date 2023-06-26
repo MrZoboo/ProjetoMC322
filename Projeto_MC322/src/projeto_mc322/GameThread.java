@@ -1,27 +1,27 @@
 package projeto_mc322;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-public class GameThread extends Thread{
-
-    protected Map mp;
+public class GameThread extends MovementThread{
     protected SPMapForm mf;
-    protected int score;
-    protected int level = 1;
-    protected int scorePerLevel = 3;
-    protected int pause = 1000;
-    protected int decreasePause = (int) Math.floor(pause*(0.1));
 
     public GameThread(Map mp, SPMapForm mf){
-        this.mp = mp;
+        super(mp);
         this.mf = mf;
         mf.updateScore(score);
         mf.updateLevel(level);
     }
+
+    public SPMapForm getMf() {
+        return this.mf;
+    }
+
+    public void setMf(SPMapForm mf) {
+        this.mf = mf;
+    }
+
     public void updatePause(){
         decreasePause = (int) Math.floor(pause*(0.1)); 
     }
+
     public void run(){
         while(true){
             mp.spawnShape();
@@ -54,4 +54,12 @@ public class GameThread extends Thread{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " mf='" + getMf() + "'" +
+            "}";
+    }
+
 }

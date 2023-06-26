@@ -1,29 +1,37 @@
 package projeto_mc322;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+public class MPGameThread extends MovementThread{
 
-public class MPGameThread extends Thread{
-
-    protected Map mp;
     protected MpMapForm mf;
-    protected int score;
-    protected int level = 1;
-    protected int scorePerLevel = 3;
-    protected int pause = 1000;
-    protected int decreasePause = (int) Math.floor(pause*(0.1));
     protected Map opponent;
 
     public MPGameThread(Map mp, Map opponent,  MpMapForm mf){
-        this.mp = mp;
+        super(mp);
         this.opponent = opponent;
         this.mf = mf;
-        // mf.updateScore(score);
-        // mf.updateLevel(level);
     }
+
+    public MpMapForm getMf() {
+        return this.mf;
+    }
+
+    public void setMf(MpMapForm mf) {
+        this.mf = mf;
+    }
+
+    public Map getOpponent() {
+        return this.opponent;
+    }
+
+    public void setOpponent(Map opponent) {
+        this.opponent = opponent;
+    }
+
+
     public void updatePause(){
         decreasePause = (int) Math.floor(pause*(0.1)); 
     }
+
     public void run(){
         while(true){
             mp.spawnShape();
@@ -46,7 +54,6 @@ public class MPGameThread extends Thread{
                 opponent.liftBarrier();
                 System.out.println("pintado!");
             }
-            // mf.updateScore(score);
 
             int lvl = score/scorePerLevel +1;
             if(score >= 30){
@@ -54,11 +61,19 @@ public class MPGameThread extends Thread{
             }
             if(lvl > level){
                 level = lvl;
-                // mf.updateLevel(level);
                 pause -= decreasePause;
                 updatePause();
                 System.out.println("PAUSA: " + pause + " DP " + decreasePause);
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " mf='" + getMf() + "'" +
+            ", opponent='" + getOpponent() + "'" +
+            "}";
+    }
+
 }

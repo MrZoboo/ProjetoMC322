@@ -2,8 +2,6 @@ package projeto_mc322;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;

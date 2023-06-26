@@ -39,7 +39,7 @@ public class Projeto_MC322 {
     public static void gameOverMulti(){
         multif.gt1.interrupt();
         multif.gt2.interrupt();
-        String playerName = JOptionPane.showInputDialog("You Loose!");
+        JOptionPane.showInputDialog("You Loose!");
         multif.setVisible(false);
         menuf.setVisible(true);
         
