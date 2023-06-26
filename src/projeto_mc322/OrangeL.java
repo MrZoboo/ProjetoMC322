@@ -2,6 +2,9 @@ package projeto_mc322;
 
 import java.awt.Color;
 
+/**
+ * Shape: orange L tetramino
+ */
 public class OrangeL extends Shape{
     
     public OrangeL(){

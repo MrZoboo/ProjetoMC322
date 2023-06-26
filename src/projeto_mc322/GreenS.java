@@ -1,8 +1,10 @@
-
 package projeto_mc322;
 
 import java.awt.Color;
 
+/**
+ * Shape: Green S tetramino
+ */
 public class GreenS extends Shape {
     
     public GreenS(){

@@ -4,10 +4,16 @@ import java.awt.Color;
 
 public class BlueBar extends Shape {
 
+    /**
+     * Shape: blue rectangle 1x4 
+     */
     public BlueBar(){
         super(new int[][]{{1, 1, 1, 1}}, Color.cyan);
     }
 
+    /**
+     * rotation of the shape
+     */
     public void rotate(){
         super.rotate();
         if(this.getWidth() == 1){

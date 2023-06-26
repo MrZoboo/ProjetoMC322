@@ -3,6 +3,9 @@ package projeto_mc322;
 
 import java.awt.Color;
 
+/**
+ * Shape: Blue L tetramino
+ */
 public class BlueL  extends Shape{
 
     public BlueL(){
