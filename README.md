@@ -10,3 +10,5 @@ No início de cada partida, é lido um arquivo "leaderboard" com o nome a pontua
 - Gabriel Pereira Viterbo 217600
 - Glauco César Prado Soares 205404
 - João Vinicius Moreira Guimarães 260542
+
+Video: https://drive.google.com/file/d/1MV-4SN_0HNDzE7S-xvX13_iABC7UzPzI/view?usp=drive_link
